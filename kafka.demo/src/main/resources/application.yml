@@ -1,0 +1,45 @@
+server:
+  tomcat:
+    uri-encoding: UTF-8
+spring:
+  output:
+    ansi:
+      enabled: always
+  banner:
+    charset: UTF-8
+  http:
+    encoding:
+      charset: UTF-8
+      enabled: true
+      force: true
+  messages:
+    encoding: UTF-8
+  profiles:
+    active: dev
+  application:
+    name: bigdata-runtime-canal-collection
+  kafka:
+    consumer:
+      bootstrap-servers: 172.16.55.23:9092,172.16.55.39:9092,172.16.55.24:9092
+      enable-auto-commit: true
+      auto-commit-interval: 1000
+      fetch-max-wait: 5000
+      heartbeat-interval: 3000
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      auto-offset-reset: earliest
+      max-poll-records: 500
+      client-id: brcc
+    producer:
+      bootstrap-servers: 172.16.55.23:9092,172.16.55.39:9092,172.16.55.24:9092
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.apache.kafka.common.serialization.StringSerializer
+      acks: 1
+      retries: 0
+      batch-size: 4096
+      buffer-memory: 40960
+      client-id: brcc
+mykafkaconfig:
+  group-id: topicGroupId
+
+
