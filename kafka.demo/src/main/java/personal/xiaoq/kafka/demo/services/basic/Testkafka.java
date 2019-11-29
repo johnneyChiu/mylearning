@@ -12,7 +12,6 @@ import org.springframework.scheduling.annotation.AsyncResult;
 import org.springframework.stereotype.Service;
 import org.springframework.util.concurrent.ListenableFuture;
 import org.springframework.util.concurrent.ListenableFutureCallback;
-import personal.xiaoq.common.domain.BaseSendData;
 import personal.xiaoq.kafka.demo.domain.TestRecords;
 import personal.xiaoq.utils.GsonUtils;
 
@@ -49,7 +48,7 @@ public class Testkafka {
                 .startTime(System.currentTimeMillis())
                 .build();
         ListenableFuture<SendResult<String, String>> future =
-                kafkaTemplate.send("topic6", GsonUtils.gsonCreate().toJson(testRecords));
+                kafkaTemplate.send("topic6", GsonUtils.gsonPrettyCreate().toJson(testRecords));
         future.addCallback(new ListenableFutureCallback<SendResult<String, String>>() {
             @Override
             public void onFailure(Throwable throwable) {
@@ -74,7 +73,7 @@ public class Testkafka {
                 .money(BigDecimal.valueOf(getRandomDbouleInRange(-500, 500)))
                 .startTime(System.currentTimeMillis())
                 .build();
-        log.info("data is {}", GsonUtils.gsonCreate().toJson(testRecords));
+        log.info("data is {}", GsonUtils.gsonPrettyCreate().toJson(testRecords));
     }
 
     @Async("myExecutor")

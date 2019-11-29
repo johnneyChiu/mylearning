@@ -16,7 +16,7 @@
  * limitations under the License.
  */
 
-package personal.xiaoq;
+package personal.xiaoq.realtime;
 
 import org.apache.flink.api.java.ExecutionEnvironment;
 import org.apache.flink.table.catalog.hive.HiveCatalog;

@@ -14,6 +14,7 @@
     <module>springjdbc.test</module>
     <module>commons</module>
       <module>kafka.demo</module>
+      <module>calcite.demo</module>
   </modules>
 
   <name>learning.parent</name>
@@ -44,6 +45,12 @@
     <kafka.server.version>1.1.0</kafka.server.version>
     <maven.shade.plugin.version>3.1.0</maven.shade.plugin.version>
     <disruptor.version>3.4.2</disruptor.version>
+    <canal.version>1.1.4</canal.version>
+    <calcite.version>1.21.0</calcite.version>
+    <calcite.avatica.version>1.15.0</calcite.avatica.version>
+    <guava.version>28.0-jre</guava.version>
+    <version.control.version>2.3</version.control.version>
+    <jaonpath.version>2.4.0</jaonpath.version>
   </properties>
 <dependencyManagement>
   <dependencies>
@@ -61,41 +68,41 @@
       <version>${antlr4-runtime.version}</version>
     </dependency>
     <dependency>
+      <groupId>com.alibaba.otter</groupId>
+      <artifactId>canal.protocol</artifactId>
+      <version>${canal.version}</version>
+    </dependency>
+
+    <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
       <version>4.11</version>
       <scope>test</scope>
     </dependency>
-    <!-- https://mvnrepository.com/artifact/org.slf4j/slf4j-api -->
     <dependency>
       <groupId>org.slf4j</groupId>
       <artifactId>slf4j-api</artifactId>
       <version>${slf4j.api.version}</version>
     </dependency>
 
-    <!-- https://mvnrepository.com/artifact/ch.qos.logback/logback-classic -->
     <dependency>
       <groupId>ch.qos.logback</groupId>
       <artifactId>logback-classic</artifactId>
       <version>${logback.version}</version>
       <!--<scope>test</scope>-->
     </dependency>
-
-    <!-- https://mvnrepository.com/artifact/ch.qos.logback/logback-core -->
     <dependency>
       <groupId>ch.qos.logback</groupId>
       <artifactId>logback-core</artifactId>
       <version>${logback.version}</version>
     </dependency>
 
-    <!-- https://mvnrepository.com/artifact/ch.qos.logback/logback-access -->
     <dependency>
       <groupId>ch.qos.logback</groupId>
       <artifactId>logback-access</artifactId>
       <version>${logback.version}</version>
     </dependency>
 
-    <!-- https://mvnrepository.com/artifact/org.codehaus.janino/janino -->
     <dependency>
       <groupId>org.codehaus.janino</groupId>
       <artifactId>janino</artifactId>
@@ -145,6 +152,28 @@
         </exclusion>
       </exclusions>
     </dependency>
+    <dependency>
+      <groupId>org.apache.calcite</groupId>
+      <artifactId>calcite-core</artifactId>
+      <version>1.21.0</version>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.calcite.avatica</groupId>
+      <artifactId>avatica-core</artifactId>
+      <version>${calcite.avatica.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>com.google.guava</groupId>
+      <artifactId>guava</artifactId>
+      <version>${guava.version}</version>
+    </dependency>
+
+    <dependency>
+      <groupId>com.jayway.jsonpath</groupId>
+      <artifactId>json-path</artifactId>
+      <version>${jaonpath.version}</version>
+    </dependency>
+
   </dependencies>
 </dependencyManagement>
 
@@ -168,6 +197,7 @@
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-source-plugin</artifactId>
+          <version>3.0.1</version>
           <executions>
             <execution>
               <id>attach-sources</id>
@@ -182,6 +212,16 @@
             <groupId>org.apache.maven.plugins</groupId>
             <artifactId>maven-surefire-plugin</artifactId>
             <version>2.19.1</version>
+        </plugin>
+        <plugin>
+          <groupId>org.codehaus.mojo</groupId>
+          <artifactId>versions-maven-plugin</artifactId>
+          <version>${version.control.version}</version>
+          <configuration>
+            <generateBackupPoms>
+              false
+            </generateBackupPoms>
+          </configuration>
         </plugin>
       </plugins>
     </pluginManagement>

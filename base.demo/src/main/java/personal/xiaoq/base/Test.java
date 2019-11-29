@@ -33,9 +33,10 @@ public class Test {
     }
 
     public static void main(String[] args) {
-        foo(0);
+        /*foo(0);
         foo(1);
-        System.out.println(output);
+        System.out.println(output);*/
+        print();
     }
 
 
@@ -43,4 +44,26 @@ public class Test {
         return (short) x / y * 2;
     }
 
+
+    public static void print(){
+        String str="{" +
+                "    'title': 'Person'," +
+                "    'type': 'object'," +
+                "    'properties': {" +
+                "        'firstName': {" +
+                "            'type': 'string'" +
+                "        }," +
+                "        'lastName': {" +
+                "            'type': 'string'" +
+                "        }," +
+                "        'age': {" +
+                "            'description': 'Age in years'," +
+                "            'type': 'integer'," +
+                "            'minimum': 0" +
+                "        }" +
+                "    }," +
+                "    'required': ['firstName', 'lastName']" +
+                "}";
+        System.out.println(str);
+    }
 }

@@ -14,7 +14,7 @@ import com.google.gson.LongSerializationPolicy;
  */
 public class GsonUtils{
 
-    public static Gson gsonCreate() {
+    public static Gson gsonPrettyCreate() {
         return new GsonBuilder()
                 .setLenient()// json宽松
                 .enableComplexMapKeySerialization()//支持Map的key为复杂对象的形式
@@ -26,6 +26,16 @@ public class GsonUtils{
                 .setDateFormat("yyyy-MM-dd HH:mm:ss")
                 .create();
     }
-
+    public static Gson gsonNormalCreate() {
+        return new GsonBuilder()
+                .setLenient()// json宽松
+                .enableComplexMapKeySerialization()//支持Map的key为复杂对象的形式
+                .setLongSerializationPolicy(LongSerializationPolicy.STRING)
+                .serializeNulls() //智能null
+                .disableHtmlEscaping() //默认是GSON把HTML 转义的
+                .enableComplexMapKeySerialization()
+                .setDateFormat("yyyy-MM-dd HH:mm:ss")
+                .create();
+    }
 
 }
