@@ -38,7 +38,7 @@ under the License.
         <scala.binary.version>2.11</scala.binary.version>
         <maven.compiler.source>${java.version}</maven.compiler.source>
         <maven.compiler.target>${java.version}</maven.compiler.target>
-        <hive.version>1.2.1</hive.version>
+        <hive.version>3.1.2</hive.version>
         <thrift.version>0.9.3</thrift.version>
         <hadoop.version>2.6.5</hadoop.version>
         <flink-hadoop.version>2.6.5-7.0</flink-hadoop.version>
