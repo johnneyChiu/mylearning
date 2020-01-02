@@ -22,6 +22,8 @@ import org.apache.flink.table.sinks.TableSink;
 import java.time.LocalDateTime;
 import java.util.HashMap;
 
+import static personal.xiaoq.realtime.schema.JsonSchema.JSON_SCHEMA;
+
 /**
  * @Author: qiuqiangqiang
  * @Email: johnney_chiu@163.com
@@ -39,9 +41,9 @@ public class FlinkStreamTableTest {
 
     public static void main(String[] args) throws Exception {
 
-        StreamExecutionEnvironment bsEnv = StreamExecutionEnvironment.getExecutionEnvironment();
         //table operate
         EnvironmentSettings bsSettings = EnvironmentSettings.newInstance().useBlinkPlanner().inStreamingMode().build();
+        StreamExecutionEnvironment bsEnv = StreamExecutionEnvironment.getExecutionEnvironment();
         StreamTableEnvironment tableEnv = StreamTableEnvironment.create(bsEnv, bsSettings);
         //设置无更改状态最小保存时间，最大保存时间
         tableEnv.getConfig().setIdleStateRetentionTime(Time.days(1), Time.days(2));
@@ -50,51 +52,37 @@ public class FlinkStreamTableTest {
             put("group-id", "for_test_xiaoq");
             put("jobName", "test_streaming_table_job");
             put("dateEscape", "20191019120000");
+            put("zookeeper.connect", "");
         }});
-         final String JSON_SCHEMA =
-                "{" +
-                        "    'title': 'Person'," +
-                        "    'type': 'object'," +
-                        "    'properties': {" +
-                        "        'firstName': {" +
-                        "            'type': 'string'" +
-                        "        }," +
-                        "        'lastName': {" +
-                        "            'type': 'string'" +
-                        "        }," +
-                        "        'age': {" +
-                        "            'description': 'Age in years'," +
-                        "            'type': 'integer'," +
-                        "            'minimum': 0" +
-                        "        }" +
-                        "    }," +
-                        "    'required': ['firstName', 'lastName']" +
-                        "}";
+
 
         //stream to table
         //Table dmlTable = tableEnv.fromDataStream(dmlSingleOutputStreamOperator);
-        tableEnv.connect(
-                new Kafka()
-                        .version("1.0.0")
-                        .topic("xiaoqTest")
-                        .startFromEarliest()
-                        .properties(parameterTool.getProperties()))
-                .withFormat(new Json().deriveSchema()
-
-
+        tableEnv
+                .connect(
+                        new Kafka()
+                                .version("1.0.1")
+                                .topic("test-input")
+                                .startFromEarliest()
+                                .properties(parameterTool.getProperties())
+                )
+                .withFormat(new Json().jsonSchema(JSON_SCHEMA)
                 .failOnMissingField(false))
-                .withSchema(new Schema())
-                .inAppendMode()
+                .withSchema(new Schema().field("database","VARCHAR")
+                        .field("table","VARCHAR")
+                        .field("ts","TIMESTAMP")
+                        .field("es","TIMESTAMP").proctime())
+                .inUpsertMode()
                 .registerTableSource("dml");
 
 
         //注册表
        // tableEnv.registerTable("dml",dmlTable);
-        Table tableDetail=tableEnv.sqlQuery("select `table`,ts as table_count from dml ");
+        Table tableDetail=tableEnv.sqlQuery("select `database`,`table`,ts,es as table_count from dml ");
 
         //define field Names and types
         //sink to csv
-        String[] fieldNames = {"table_name", "counts"};
+        String[] fieldNames = {"database","table_name","ts","es", "counts"};
         TypeInformation[] filedTypes = {Types.STRING, Types.LONG};
         TableSink csvSink =
                 new CsvTableSink("D:\\personal\\github\\mylearning\\flink190.first\\src\\main\\resources\\sink\\xiaoq.csv", "|", 1, FileSystem.WriteMode.OVERWRITE)
@@ -108,10 +96,6 @@ public class FlinkStreamTableTest {
         //
 
         bsEnv.execute(parameterTool.get("jobName","test_xiaoq"));
-
-
-
-
 
 
     }

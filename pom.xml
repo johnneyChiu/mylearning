@@ -15,6 +15,7 @@
     <module>commons</module>
       <module>kafka.demo</module>
       <module>calcite.demo</module>
+    <module>flinktabletest</module>
   </modules>
 
   <name>learning.parent</name>
@@ -33,8 +34,7 @@
     <janino.version>3.0.7</janino.version>
     <lombok.version>1.18.6</lombok.version>
     <gson.version>2.8.5</gson.version>
-    <flink.version>1.7.1</flink.version>
-    <scala.binary.version>2.12</scala.binary.version>
+    <scala.binary.version>2.11</scala.binary.version>
     <mvn-complier.version>3.8.0</mvn-complier.version>
     <antlr4-runtime.version>4.7.2</antlr4-runtime.version>
     <spring.boot.version>2.1.1.RELEASE</spring.boot.version>
@@ -51,6 +51,12 @@
     <guava.version>28.0-jre</guava.version>
     <version.control.version>2.3</version.control.version>
     <jaonpath.version>2.4.0</jaonpath.version>
+    <flink.version>1.9.1</flink.version>
+    <scala.binary.version>2.11</scala.binary.version>
+    <hive.version>1.2.1</hive.version>
+    <thrift.version>0.9.3</thrift.version>
+    <hadoop.version>2.6.5</hadoop.version>
+    <flink-hadoop.version>2.6.5-7.0</flink-hadoop.version>
   </properties>
 <dependencyManagement>
   <dependencies>

@@ -4,6 +4,8 @@
 .project
 target
 .settings
+flink190.first/dependency-reduced-pom.xml
+
 
 
 

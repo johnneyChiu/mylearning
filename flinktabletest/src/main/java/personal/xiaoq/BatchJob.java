@@ -16,17 +16,9 @@
  * limitations under the License.
  */
 
-package personal.xiaoq.realtime;
+package personal.xiaoq;
 
-import org.apache.commons.lang.StringUtils;
-import org.apache.flink.api.common.functions.FlatMapFunction;
-import org.apache.flink.api.java.DataSet;
 import org.apache.flink.api.java.ExecutionEnvironment;
-import org.apache.flink.api.java.tuple.Tuple2;
-import org.apache.flink.table.api.EnvironmentSettings;
-import org.apache.flink.table.catalog.hive.HiveCatalog;
-import org.apache.flink.table.planner.plan.nodes.physical.batch.BatchExecUnion;
-import org.apache.flink.util.Collector;
 
 /**
  * Skeleton for a Flink Batch Job.
@@ -41,41 +33,34 @@ import org.apache.flink.util.Collector;
 public class BatchJob {
 
 	public static void main(String[] args) throws Exception {
-
-/*
 		// set up the batch execution environment
-		final EnvironmentSettings environmentSettings = EnvironmentSettings.newInstance().useBlinkPlanner()
-				.inBatchMode().build();
-		final ExecutionEnvironment executionEnvironment= BatchEnv
-
-
-
-
-
-		// execute program
-		env.execute("Flink Batch Java API Skeleton");*/
-
 		final ExecutionEnvironment env = ExecutionEnvironment.getExecutionEnvironment();
 
-		DataSet<String> text = env.fromElements(
-				"Who's there?",
-				"I think I hear them. Stand, ho! Who's there?");
+		/*
+		 * Here, you can start creating your execution plan for Flink.
+		 *
+		 * Start with getting some data from the environment, like
+		 * 	env.readTextFile(textPath);
+		 *
+		 * then, transform the resulting DataSet<String> using operations
+		 * like
+		 * 	.filter()
+		 * 	.flatMap()
+		 * 	.join()
+		 * 	.coGroup()
+		 *
+		 * and many more.
+		 * Have a look at the programming guide for the Java API:
+		 *
+		 * http://flink.apache.org/docs/latest/apis/batch/index.html
+		 *
+		 * and the examples
+		 *
+		 * http://flink.apache.org/docs/latest/apis/batch/examples.html
+		 *
+		 */
 
-		DataSet<Tuple2<String, Integer>> wordCounts = text
-				.flatMap(new LineSplitter())
-				.groupBy(0)
-				.sum(1);
-
-		wordCounts.print();
-
-	}
-	public static class LineSplitter implements FlatMapFunction<String, Tuple2<String, Integer>> {
-		@Override
-		public void flatMap(String line, Collector<Tuple2<String, Integer>> out) {
-			for (String word : line.split(" ")) {
-				//out.collect(new Tuple2<String, Integer>(word.replaceAll("^[A-Za-z]+$"), 1));
-			}
-		}
+		// execute program
+		env.execute("Flink Batch Java API Skeleton");
 	}
 }
-

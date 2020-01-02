@@ -144,7 +144,7 @@ public class StreamingJob {
 		ddlDataStream.addSink(new MyPrintSinkFunction<FlatMessage>().connect(new MyPrintSinkOutWriter<FlatMessage>() {
 			@Override
 			public String serialize(FlatMessage record) {
-				return  GsonUtils.gsonNormalCreate().toJson(record);
+				return GsonUtils.gsonNormalCreate().toJson(record);
 			}
 		}));
 

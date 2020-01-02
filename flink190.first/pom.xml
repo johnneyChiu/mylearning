@@ -33,15 +33,7 @@ under the License.
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <flink.version>1.9.0</flink.version>
-        <java.version>1.8</java.version>
-        <scala.binary.version>2.11</scala.binary.version>
-        <maven.compiler.source>${java.version}</maven.compiler.source>
-        <maven.compiler.target>${java.version}</maven.compiler.target>
-        <hive.version>1.2.1</hive.version>
-        <thrift.version>0.9.3</thrift.version>
-        <hadoop.version>2.6.5</hadoop.version>
-        <flink-hadoop.version>2.6.5-7.0</flink-hadoop.version>
+
     </properties>
 
     <repositories>
@@ -87,9 +79,6 @@ under the License.
             <!--<scope>test</scope>-->
         </dependency>
 
-
-
-
         <!-- https://mvnrepository.com/artifact/org.apache.flink/flink-connector-kafka -->
         <dependency>
             <groupId>org.apache.flink</groupId>
@@ -106,7 +95,6 @@ under the License.
         </dependency>-->
 
         <!--通过自定义函数，格式等扩展表生态系统的通用模块。-->
-        <!-- https://mvnrepository.com/artifact/org.apache.flink/flink-table-common -->
         <dependency>
             <groupId>org.apache.flink</groupId>
             <artifactId>flink-table-common</artifactId>
@@ -115,7 +103,6 @@ under the License.
         </dependency>
 
         <!--使用Java编程语言支持DataStream / DataSet API的Table＆SQL API。-->
-        <!-- https://mvnrepository.com/artifact/org.apache.flink/flink-table-api-java-bridge -->
         <dependency>
             <groupId>org.apache.flink</groupId>
             <artifactId>flink-table-api-java-bridge_${scala.binary.version}</artifactId>
@@ -142,21 +129,18 @@ under the License.
 
 
 
-        <!-- https://mvnrepository.com/artifact/org.apache.hive/hive-metastore -->
         <dependency>
             <groupId>org.apache.hive</groupId>
             <artifactId>hive-metastore</artifactId>
             <version>${hive.version}</version>
         </dependency>
 
-        <!-- https://mvnrepository.com/artifact/org.apache.hive/hive-exec -->
         <dependency>
             <groupId>org.apache.hive</groupId>
             <artifactId>hive-exec</artifactId>
             <version>${hive.version}</version>
         </dependency>
 
-        <!-- https://mvnrepository.com/artifact/org.apache.thrift/libfb303 -->
         <dependency>
             <groupId>org.apache.thrift</groupId>
             <artifactId>libfb303</artifactId>
@@ -172,40 +156,22 @@ under the License.
         </dependency>
 -->
 
-
-        <!-- Add connector dependencies here. They must be in the default scope (compile). -->
-
-        <!-- Example:
-
-		<dependency>
-			<groupId>org.apache.flink</groupId>
-			<artifactId>flink-connector-kafka-0.10_${scala.binary.version}</artifactId>
-			<version>${flink.version}</version>
-		</dependency>
-		-->
-
-        <!-- Add logging framework, to produce console output when running in the IDE. -->
-        <!-- These dependencies are excluded from the application JAR by default. -->
-        <!-- https://mvnrepository.com/artifact/org.slf4j/slf4j-api -->
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-api</artifactId>
         </dependency>
 
-        <!-- https://mvnrepository.com/artifact/ch.qos.logback/logback-classic -->
         <dependency>
             <groupId>ch.qos.logback</groupId>
             <artifactId>logback-classic</artifactId>
             <!--<scope>test</scope>-->
         </dependency>
 
-        <!-- https://mvnrepository.com/artifact/ch.qos.logback/logback-core -->
         <dependency>
             <groupId>ch.qos.logback</groupId>
             <artifactId>logback-core</artifactId>
         </dependency>
 
-        <!-- https://mvnrepository.com/artifact/ch.qos.logback/logback-access -->
         <dependency>
             <groupId>ch.qos.logback</groupId>
             <artifactId>logback-access</artifactId>
@@ -260,12 +226,15 @@ under the License.
 
             <!-- Java Compiler -->
             <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.1</version>
+                <version>${mvn-compiler.version}</version>
                 <configuration>
-                    <source>${java.version}</source>
-                    <target>${java.version}</target>
+                    <source>${maven.compiler.source}</source>
+                    <compilerVersion>${maven.compiler.compilerVersion}</compilerVersion>
+                    <target>${maven.compiler.target}</target>
+                    <compilerArgument>-Xlint:all</compilerArgument>
+                    <showWarnings>true</showWarnings>
+                    <showDeprecation>true</showDeprecation>
                 </configuration>
             </plugin>
 
@@ -317,7 +286,6 @@ under the License.
 
         <pluginManagement>
             <plugins>
-
                 <!-- This improves the out-of-the-box experience in Eclipse by resolving some warnings. -->
                 <plugin>
                     <groupId>org.eclipse.m2e</groupId>
@@ -373,10 +341,7 @@ under the License.
                     <name>idea.version</name>
                 </property>
             </activation>
-
             <dependencies>
-
-
                 <dependency>
                     <groupId>org.apache.flink</groupId>
                     <artifactId>flink-java</artifactId>
@@ -402,7 +367,28 @@ under the License.
                     <version>${flink.version}</version>
                     <!--<scope>runtime</scope>-->
                 </dependency>
-
+                <dependency>
+                    <groupId>org.apache.flink</groupId>
+                    <artifactId>flink-json</artifactId>
+                    <version>${flink.version}</version>
+                </dependency>
+                <dependency>
+                    <groupId>org.apache.flink</groupId>
+                    <artifactId>flink-table-planner-blink_${scala.binary.version}</artifactId>
+                    <version>${flink.version}</version>
+                    <!--<scope>provided</scope>-->
+                </dependency>
+                <dependency>
+                    <groupId>org.apache.flink</groupId>
+                    <artifactId>flink-table-api-java-bridge_${scala.binary.version}</artifactId>
+                    <version>${flink.version}</version>
+                    <!--<scope>provided</scope>-->
+                </dependency>
+                <dependency>
+                    <groupId>org.apache.flink</groupId>
+                    <artifactId>flink-connector-kafka_${scala.binary.version}</artifactId>
+                    <version>${flink.version}</version>
+                </dependency>
             </dependencies>
         </profile>
     </profiles>
