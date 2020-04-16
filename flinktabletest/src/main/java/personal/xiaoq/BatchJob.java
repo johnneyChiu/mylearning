@@ -19,6 +19,9 @@
 package personal.xiaoq;
 
 import org.apache.flink.api.java.ExecutionEnvironment;
+import org.apache.flink.shaded.guava18.com.google.common.collect.Lists;
+
+import java.util.List;
 
 /**
  * Skeleton for a Flink Batch Job.
@@ -35,7 +38,6 @@ public class BatchJob {
 	public static void main(String[] args) throws Exception {
 		// set up the batch execution environment
 		final ExecutionEnvironment env = ExecutionEnvironment.getExecutionEnvironment();
-
 		/*
 		 * Here, you can start creating your execution plan for Flink.
 		 *

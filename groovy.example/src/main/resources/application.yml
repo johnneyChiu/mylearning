@@ -1,0 +1,41 @@
+server:
+  tomcat:
+    uri-encoding: UTF-8
+spring:
+  output:
+    ansi:
+      enabled: always
+  banner:
+    charset: UTF-8
+  http:
+    encoding:
+      charset: UTF-8
+      enabled: true
+      force: true
+  messages:
+    encoding: UTF-8
+  profiles:
+    active: dev
+  application:
+    name: test
+
+mykafkaconfig:
+  group-id: topicGroupId
+
+#log.basepath: /home/tomcat/logs/bigdata-runtime/hujin
+log.path: D:\personal\github\logs
+log.root.level: INFO
+log.app.level: TRACE
+log.app.package: personal.xiaoq
+log.pattern.dev: -%d{HH:mm:ss.SSS} [%thread] %-5level %logger{48}:%line - %msg%n}
+log.maxsize: 100MB
+
+logging:
+  config: classpath:spring-logback.xml
+  level:
+    org.springfromework.web: WARN
+    org.springframework.aop: WARN
+    org.springframework.beans.factory: WARN
+
+
+

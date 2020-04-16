@@ -10,12 +10,15 @@
   <modules>
     <module>base.demo</module>
     <module>Antlr4.demo</module>
-    <module>flink190.first</module>
+    <module>flink.first</module>
     <module>springjdbc.test</module>
     <module>commons</module>
-      <module>kafka.demo</module>
-      <module>calcite.demo</module>
+    <module>kafka.demo</module>
+    <module>calcite.demo</module>
     <module>flinktabletest</module>
+    <module>impala.test</module>
+    <module>groovy.example</module>
+    <module>impala.test</module>
   </modules>
 
   <name>learning.parent</name>
@@ -37,7 +40,7 @@
     <scala.binary.version>2.11</scala.binary.version>
     <mvn-complier.version>3.8.0</mvn-complier.version>
     <antlr4-runtime.version>4.7.2</antlr4-runtime.version>
-    <spring.boot.version>2.1.1.RELEASE</spring.boot.version>
+    <spring.boot.version>2.2.2.RELEASE</spring.boot.version>
     <mysql-connector-version>6.0.6</mysql-connector-version>
     <mvn-compiler.version>3.8.0</mvn-compiler.version>
     <kafka.clients.version>1.1.0</kafka.clients.version>
@@ -51,12 +54,18 @@
     <guava.version>28.0-jre</guava.version>
     <version.control.version>2.3</version.control.version>
     <jaonpath.version>2.4.0</jaonpath.version>
-    <flink.version>1.9.1</flink.version>
+    <flink.version>1.10.0</flink.version>
     <scala.binary.version>2.11</scala.binary.version>
-    <hive.version>1.2.1</hive.version>
+    <hive.version>1.1.0</hive.version>
     <thrift.version>0.9.3</thrift.version>
     <hadoop.version>2.6.5</hadoop.version>
     <flink-hadoop.version>2.6.5-7.0</flink-hadoop.version>
+    <groovy-all.version>2.4.15</groovy-all.version>
+    <common-pool2.version>2.8.0</common-pool2.version>
+    <jsonpath.version>2.4.0</jsonpath.version>
+    <druid.version>1.0.29</druid.version>
+    <mybatis.starter.version>2.1.1</mybatis.starter.version>
+    <impala.jdbc41.version>2.5.41</impala.jdbc41.version>
   </properties>
 <dependencyManagement>
   <dependencies>
@@ -174,12 +183,46 @@
       <version>${guava.version}</version>
     </dependency>
 
+
+    <dependency>
+      <groupId>org.codehaus.groovy</groupId>
+      <artifactId>groovy-all</artifactId>
+      <version>${groovy-all.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.commons</groupId>
+      <artifactId>commons-pool2</artifactId>
+      <version>${common-pool2.version}</version>
+    </dependency>
+    <!-- https://mvnrepository.com/artifact/com.jayway.jsonpath/json-path -->
     <dependency>
       <groupId>com.jayway.jsonpath</groupId>
       <artifactId>json-path</artifactId>
-      <version>${jaonpath.version}</version>
+      <version>${jsonpath.version}</version>
     </dependency>
 
+    <dependency>
+      <groupId>com.alibaba</groupId>
+      <artifactId>druid</artifactId>
+      <version>${druid.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.mybatis.spring.boot</groupId>
+      <artifactId>mybatis-spring-boot-starter</artifactId>
+      <version>${mybatis.starter.version}</version>
+    </dependency>
+    <!-- https://mvnrepository.com/artifact/com.cloudera.impala.jdbc/ImpalaJDBC41 -->
+    <dependency>
+      <groupId>com.cloudera.impala.jdbc</groupId>
+      <artifactId>ImpalaJDBC41</artifactId>
+      <version>${impala.jdbc41.version}</version>
+    </dependency>
+<!--
+    <dependency>
+      <groupId>impala</groupId>
+      <artifactId>impala-jdbc41</artifactId>
+      <version>${impala.jdbc41.version}</version>
+    </dependency>-->
   </dependencies>
 </dependencyManagement>
 

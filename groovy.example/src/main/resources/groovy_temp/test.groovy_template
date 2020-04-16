@@ -1,0 +1,7 @@
+import personal.xiaoq.service.*
+import com.jayway.jsonpath.JsonPath
+class %s implements EngineGroovyModuleRule {
+   Boolean run(Object context, Object result){
+        %s //业务执行逻辑：可配置化
+    }
+}
