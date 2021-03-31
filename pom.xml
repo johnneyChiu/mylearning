@@ -51,7 +51,7 @@
     <canal.version>1.1.4</canal.version>
     <calcite.version>1.21.0</calcite.version>
     <calcite.avatica.version>1.15.0</calcite.avatica.version>
-    <guava.version>28.0-jre</guava.version>
+    <guava.version>29.0-jre</guava.version>
     <version.control.version>2.3</version.control.version>
     <jaonpath.version>2.4.0</jaonpath.version>
     <flink.version>1.10.0</flink.version>
