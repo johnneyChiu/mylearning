@@ -44,7 +44,7 @@
     <mysql-connector-version>6.0.6</mysql-connector-version>
     <mvn-compiler.version>3.8.0</mvn-compiler.version>
     <kafka.clients.version>1.1.0</kafka.clients.version>
-    <hadoop-version>2.6.0</hadoop-version>
+    <hadoop-version>3.2.3</hadoop-version>
     <kafka.server.version>1.1.0</kafka.server.version>
     <maven.shade.plugin.version>3.1.0</maven.shade.plugin.version>
     <disruptor.version>3.4.2</disruptor.version>
